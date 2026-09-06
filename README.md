@@ -1,5 +1,6 @@
-### IT GUYS(team name) ###
+### IT GUYS 
+
 **MEMBERS:**
-  -MUHIZI Shaun
-  -HAKIZIMANA Baraka Joel
-  -NITEKA Louange Morel 
+  - MUHIZI Shaun
+  - HAKIZIMANA Baraka Joel
+  - NITEKA Louange Morel 
