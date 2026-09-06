@@ -6,7 +6,14 @@
   - HAKIZIMANA Baraka Joel
   - NITEKA Morel Louange
 
+**PROJECT DESCRIPTION**
+
+This project is a full-stack MoMo SMS data processing and analytics application. It is designed to process Mobile Money (MoMo) transaction messages stored in XML format, clean and normalize the data, categorize different types of transactions, and store the processed information in a relational database.
+
+The application will provide a frontend dashboard where users can analyze and visualize transaction data through statistics, charts, and tables. The system will help transform raw MoMo SMS data into organized and meaningful information that can be used for analysis and decision-making.
+
 **PROJECT STRUCTURE**
+
 ```
 ├── README.md
 └── momo-data-project
