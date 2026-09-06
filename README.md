@@ -56,5 +56,5 @@ The application will provide a frontend dashboard where users can analyze and vi
 [Google Drive link](https://drive.google.com/file/d/16kzjM9FzY3iCG_MnS6oz049an5WkH_cc/view?usp=sharing)
 
 ## Project Management 
-[Scrum Board](htttps://github.com/users/smuhizi-hue/projects/1)
+[Scrum Board](https://github.com/users/smuhizi-hue/projects/1)
 
