@@ -1,6 +1,7 @@
-### IT GUYS 
+### IT GUYS
 
 **MEMBERS:**
+
   - MUHIZI Shaun
   - HAKIZIMANA Baraka Joel
-  - NITEKA Louange Morel 
+  - NITEKA Morel Louange
