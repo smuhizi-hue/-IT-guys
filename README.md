@@ -7,9 +7,9 @@
   - NITEKA Morel Louange
 
 **PROJECT STRUCTURE**
-.
+```
+├── README.md
 └── momo-data-project
-    ├── README.md
     ├── api
     │   ├── __init__.py
     │   ├── app.py
@@ -45,5 +45,4 @@
         ├── assets
         ├── chart_handler.js
         └── styles.css
-
-
+```
