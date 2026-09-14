@@ -1,6 +1,5 @@
 ## Database design Rationale
-### Entity Relationship Diagram (ERD)
-https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing
+### Entity Relationship Diagram (ERD) https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing
 ERD Design Rationale and justification
 
 The Entity Relationship Diagram (ERD) for the Mobile Money sms processing system was designed to translate raw xml data into a scalable, normalized relational schema that guarantees data integrity and optimal query performance. The schema is organized around four core entities and a junction entity to handle complex transaction patterns.
