@@ -1,2 +1,15 @@
 ## Database design Rationale
 ### Entity Relationship Diagram (ERD)
+https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing
+ERD Design Rationale and justification
+
+The Entity Relationship Diagram (ERD) for the Mobile Money sms processing system was designed to translate raw xml data into a scalable, normalized relational schema that guarantees data integrity and optimal query performance. The schema is organized around four core entities and a junction entity to handle complex transaction patterns.
+Core Entities and cardinality 
+Users (Sender and receiver): stores unique customer profile information(Phone number, name account status). Because a user can initialise or receive multiple transactions over time, a 1:M(One to Many) relationship exists between Users and Transactions.
+Transaction_categories: Classifies financial movements into distinct operational types(e.g Bank Transfer, cash Out, Airtime Top up, Utility payment). Each category can encompass many transactions(1:M), allowing easy aggregation for analytics.
+System logs: Tracks data extraction, xml parsing status, dead letter snippet routing. And processing with Transaction to provide full auditability for every processed record.
+
+Resolving Many to Many Relationships 
+A user can hold multiple roles across different transactions that can involve multiple parties (sender and receiver). To resolve potential M:N ambiguity, a junction/associative table named Transaction_Parties was introduced. This table links Users to Transactions via composite Foreign keys while specifying the exact participant role(Sender vs receiver) for each record.
+Data integrity and constraints
+Primary keys(e.g: transaction_id, user_id) utilize auto incrementing integers or UUID’S, while Foreign Key constraints enforce referential integrity 	across related tables. Check constraints prevent negative monetary amounts(amount >= 0), and standard Datetime fields ensure ISO-8601 compliance across all logged system events.
