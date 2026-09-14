@@ -1,0 +1,75 @@
+{
+  "users": [
+    {
+      "user_id": 101,
+      "phone_number": "+250788123456",
+      "full_name": "Jean Claude Uwimana",
+      "user_type": "customer"
+    },
+    {
+      "user_id": 102,
+      "phone_number": "+250791987654",
+      "full_name": "Aline Mukamana",
+      "user_type": "customer"
+    },
+    {
+      "user_id": 103,
+      "phone_number": "+250789876543",
+      "full_name": "Eric Habimana",
+      "user_type": "merchant"
+    }
+  ],
+  "categories": [
+    { "category_id": 1, "category_name": "P2P Transfer" },
+    { "category_id": 2, "category_name": "Merchant Payment" }
+  ],
+  "transactions": [
+    {
+      "transaction_id": 501,
+      "momo_tx_id": "18492039481",
+      "sender_id": 101,
+      "receiver_id": 102,
+      "amount": 5000.0,
+      "fee": 50.0,
+      "timestamp": "2026-09-01T09:15:00Z"
+    },
+    {
+      "transaction_id": 502,
+      "momo_tx_id": "18492039499",
+      "sender_id": 101,
+      "receiver_id": 103,
+      "amount": 20000.0,
+      "fee": 200.0,
+      "timestamp": "2026-09-02T14:20:00Z"
+    }
+  ],
+  "complex_transaction_response": {
+    "transaction_id": 501,
+    "momo_tx_id": "18492039481",
+    "amount": 5000.0,
+    "fee": 50.0,
+    "timestamp": "2026-09-01T09:15:00Z",
+    "sender": {
+      "user_id": 101,
+      "phone_number": "+250788123456",
+      "full_name": "Jean Claude Uwimana",
+      "user_type": "customer"
+    },
+    "receiver": {
+      "user_id": 102,
+      "phone_number": "+250791987654",
+      "full_name": "Aline Mukamana",
+      "user_type": "customer"
+    },
+    "categories": [
+      { "category_id": 1, "category_name": "P2P Transfer" }
+    ],
+    "logs": [
+      {
+        "log_id": 9001,
+        "log_level": "INFO",
+        "message": "SMS payload parsed and validated successfully"
+      }
+    ]
+  }
+}
