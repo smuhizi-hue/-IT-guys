@@ -112,6 +112,7 @@ It uses transaction_id and category_id as a composite primary key. Both columns 
 
 ## Database Setup
 
+
 Open MySQL Workbench and run the database_setup.sql file.
 
 The script will:
@@ -124,6 +125,7 @@ The script will:
 6. Demonstrate basic CRUD operations.
 
 ## CRUD Operations
+
 
 The project demonstrates:
 
