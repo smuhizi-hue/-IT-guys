@@ -144,3 +144,4 @@ database_setup.sql contains the SQL code for creating and testing the database.
 
 https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing = ERD digram
 The Entity Relationship Diagram (ERD) models a relational database for processing MoMo SMS data, converting raw XML inputs into a structured system that ensures data integrity and high performance. For more explanation in the momo-data-project there is a directory called Docs with the file Docs.
+https://docs.google.com/spreadsheets/d/1SAYGL4zanztbNKppt2nHTYapkpQIDEP7vi9C7M-wkKo/edit?usp=sharing
