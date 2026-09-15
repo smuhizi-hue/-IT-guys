@@ -57,4 +57,85 @@ The application will provide a frontend dashboard where users can analyze and vi
 
 ## Project Management 
 [Scrum Board](https://github.com/users/smuhizi-hue/projects/1)
+i# Money Transaction Database
 
+## Description
+
+This project is a MySQL database for storing and managing Mobile Money transaction information.
+
+The database is called money_transaction and contains information about users, transactions, system logs, and transaction categories.
+
+## Tables
+
+### USERS
+
+Stores information about customers and merchants.
+
+Main columns:
+
+* user_id - unique ID for each user
+* phone_number - user's phone number
+* full_name - user's name
+* user_type - customer or merchant
+
+user_id is the primary key. An index is also created on phone_number to make searching easier.
+
+### TRANSACTIONS
+
+Stores information about money transactions.
+
+It contains the transaction ID, Mobile Money transaction ID, sender, receiver, amount, fee, and transaction time.
+
+transaction_id is the primary key. sender_id and receiver_id are foreign keys that reference the USERS table.
+
+The database also checks that the amount is greater than zero and that the fee is not negative.
+
+### SYSTEM_LOGS
+
+Stores logs related to transactions.
+
+It contains the log ID, transaction ID, log level, and message.
+
+log_id is the primary key and transaction_id is a foreign key.
+
+### TRANSACTION_CATEGORIES
+
+Stores the different types of transactions, such as Transfer, Payment, Airtime, Withdrawal, and Deposit.
+
+category_id is the primary key.
+
+### TRANSACTION_CATEGORY_MAPPINGS
+
+Connects transactions with their categories.
+
+It uses transaction_id and category_id as a composite primary key. Both columns are also foreign keys.
+
+## Database Setup
+
+Open MySQL Workbench and run the database_setup.sql file.
+
+The script will:
+
+1. Create the money_transaction database.
+2. Select the database.
+3. Create all five tables.
+4. Add primary keys, foreign keys, constraints, and an index.
+5. Insert sample data.
+6. Demonstrate basic CRUD operations.
+
+## CRUD Operations
+
+The project demonstrates:
+
+* INSERT for adding data
+* SELECT for viewing data
+* UPDATE for changing data
+* DELETE for removing data
+
+## Technologies Used
+
+* MySQL Workbench
+* SQL
+## Files
+
+database_setup.sql contains the SQL code for creating and testing the database.
