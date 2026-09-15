@@ -142,4 +142,4 @@ The project demonstrates:
 
 database_setup.sql contains the SQL code for creating and testing the database.
 https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing
-The Entity Relationship Diagram (ERD) models a relational database for processing MoMo SMS data, converting raw XML inputs into a structured system that ensures data integrity and high performance.
+The Entity Relationship Diagram (ERD) models a relational database for processing MoMo SMS data, converting raw XML inputs into a structured system that ensures data integrity and high performance. For more explanation in the momo-data-project there is a directory called Docs.
