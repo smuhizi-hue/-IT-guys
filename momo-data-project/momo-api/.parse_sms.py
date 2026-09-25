@@ -1,38 +1,62 @@
+import argparse
 import json
-import re
+import logging
 from pathlib import Path
-import xml.etree.ElementTree as ET
-from xml.sax.saxutils import escape
+from lxml import etree
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
-def read_sms_xml(file_path):
-    text = file_path.read_text(encoding="utf-8", errors="replace")
-    text = text[text.find("<"):]  # remove anything before the XML start
+def parse_sms_backup(xml_path: Path) -> list[dict]:
+    """Parse SMS backup XML files, handling unescaped control characters."""
+    # lxml recover=True safely handles unescaped <, >, & inside message bodies
+    parser = etree.XMLParser(recover=True, encoding="utf-8")
+    
+    try:
+        tree = etree.parse(str(xml_path), parser)
+    except Exception as e:
+        logging.error(f"Failed to read XML file {xml_path}: {e}")
+        return []
 
-    # Fix XML issues caused by SMS text like < and > in message bodies.
-    text = re.sub(
-        r'([A-Za-z_:-]+)="([^"]*)"',
-        lambda m: f'{m.group(1)}="{escape(m.group(2), {"\"": "&quot;"})}"',
-        text,
+    fields = (
+        "protocol",
+        "address",
+        "date",
+        "type",
+        "body",
+        "service_center",
+        "readable_date",
     )
 
-    return ET.fromstring(text)
+    records = []
+    for elem in tree.iter("sms"):
+        records.append({field: elem.get(field) for field in fields})
+
+    return records
 
 
-xml_file = Path(__file__).resolve().parent / "modified_sms_v2.xml"
-root = read_sms_xml(xml_file)
+def main():
+    parser = argparse.ArgumentParser(description="Extract SMS records from XML backup.")
+    parser.add_argument(
+        "file",
+        nargs="?",
+        default="modified_sms_v2.xml",
+        type=Path,
+        help="Path to the XML file",
+    )
+    args = parser.parse_args()
 
-sms_records = []
-for sms in root.findall(".//sms"):
-    sms_records.append({
-        "protocol": sms.get("protocol"),
-        "address": sms.get("address"),
-        "date": sms.get("date"),
-        "type": sms.get("type"),
-        "body": sms.get("body"),
-        "service_center": sms.get("service_center"),
-        "readable_date": sms.get("readable_date"),
-    })
+    xml_file = args.file.resolve()
+    if not xml_file.is_file():
+        logging.error(f"File not found: {xml_file}")
+        return
 
-print(f"Parsed {len(sms_records)} SMS records")
-print(json.dumps(sms_records[:5], indent=4, ensure_ascii=False))
+    sms_records = parse_sms_backup(xml_file)
+    logging.info(f"Successfully extracted {len(sms_records)} records from {xml_file.name}")
+
+    # Inspect first few records
+    print(json.dumps(sms_records[:5], indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
