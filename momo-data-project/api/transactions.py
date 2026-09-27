@@ -151,6 +151,67 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         self._send_response({"error": "Route not found"}, status_code=404)
+    def do_POST(self):
+        # POST /transactions -> Create a new transaction
+        if self.path == '/transactions':
+            try:
+                data = self._read_json_body()
+                global current_id
+                new_transaction = {
+                    "id": current_id,
+                    "raw_date": data.get("raw_date"),
+                    "body": data.get("body"),
+                    "amount": data.get("amount"),
+                    "recipient_or_sender": data.get("recipient_or_sender"),
+                    "type": data.get("type", "Unknown")
+                }
+                transactions.append(new_transaction)
+                current_id += 1
+                self._send_response(new_transaction, status_code=201)
+            except Exception as e:
+                self._send_response({"error": "Invalid JSON format"}, status_code=400)
+            return
+
+        self._send_response({"error": "Route not found"}, status_code=404)
+    def do_PUT(self):
+        # PUT /transactions/{id} -> Update an existing transaction
+        match = re.match(r'^/transactions/(\d+)$', self.path)
+        if match:
+            transaction_id = int(match.group(1))
+            transaction = next((t for t in transactions if t["id"] == transaction_id), None)
+            if transaction:
+                try:
+                    data = self._read_json_body()
+                    transaction.update({
+                        "raw_date": data.get("raw_date", transaction["raw_date"]),
+                        "body": data.get("body", transaction["body"]),
+                        "amount": data.get("amount", transaction["amount"]),
+                        "recipient_or_sender": data.get("recipient_or_sender", transaction["recipient_or_sender"]),
+                        "type": data.get("type", transaction["type"])
+                    })
+                    self._send_response(transaction)
+                except Exception as e:
+                    self._send_response({"error": "Invalid JSON format"}, status_code=400)
+            else:
+                self._send_response({"error": "Transaction not found"}, status_code=404)
+            return
+
+        self._send_response({"error": "Route not found"}, status_code=404)
+
+    def do_DELETE(self):
+        # DELETE /transactions/{id} -> Delete a transaction
+        match = re.match(r'^/transactions/(\d+)$', self.path)
+        if match:
+            transaction_id = int(match.group(1))
+            transaction = next((t for t in transactions if t["id"] == transaction_id), None)
+            if transaction:
+                transactions.remove(transaction)
+                self._send_response({"message": "Transaction deleted"})
+            else:
+                self._send_response({"error": "Transaction not found"}, status_code=404)
+            return
+
+        self._send_response({"error": "Route not found"}, status_code=404)
 
 
 if __name__ == "__main__":
