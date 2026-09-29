@@ -145,3 +145,80 @@ database_setup.sql contains the SQL code for creating and testing the database.
 https://drive.google.com/file/d/1N-y6jFuu3LfvXRIu5Vk_WF1fEhGvAIga/view?usp=sharing = ERD digram
 The Entity Relationship Diagram (ERD) models a relational database for processing MoMo SMS data, converting raw XML inputs into a structured system that ensures data integrity and high performance. For more explanation in the momo-data-project there is a directory called Docs with the file Docs.
 https://docs.google.com/spreadsheets/d/1SAYGL4zanztbNKppt2nHTYapkpQIDEP7vi9C7M-wkKo/edit?usp=sharing
+
+# MoMo SMS REST API
+
+This project processes MoMo SMS data from **modified_sms_v2.xml** and provides a REST API for managing transactions.
+
+## Requirements
+
+* Python 3
+* Git
+* curl or Postman
+
+## Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/smuhizi-hue/-IT-guys.git
+cd -IT-guys
+```
+
+Create and activate a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Install dependencies if requirements.txt exists:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run the Project
+
+Run the XML parser:
+
+```bash
+python3 dsa/<.parse_sms>.py
+```
+
+Start the API:
+
+```bash
+python3 api/<transactions>.py
+```
+
+The API provides:
+
+* GET /transactions
+* GET /transactions/{id}
+* POST /transactions
+* PUT /transactions/{id}
+* DELETE /transactions/{id}
+
+All endpoints require Basic Authentication.
+
+Example:
+
+```bash
+curl -u username:password http://localhost:8000/transactions
+```
+
+## Project Folders
+
+* api/ — REST API and authentication
+* dsa/ — XML parsing and DSA
+* docs/ — API documentation
+* screenshots/ — API testing screenshots
+
+Detailed API information is available in docs/api_docs.md.
