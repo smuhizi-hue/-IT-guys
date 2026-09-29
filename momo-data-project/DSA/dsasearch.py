@@ -43,7 +43,7 @@ def dict_lookup(txn_dict, target_id):
 
 
 # ---------------------------------------------------------------
-# Bonus: Binary search on a list sorted by id -> O(log n)
+# Binary search on a list sorted by id -> O(log n)
 # ---------------------------------------------------------------
 def binary_search(sorted_txns, target_id):
     low, high = 0, len(sorted_txns) - 1
@@ -79,7 +79,7 @@ def benchmark(all_txns, n):
 
     # Searching for EVERY id in the subset (average case) 
     all_ids = [t["id"] for t in txns]
-    # ... and for the last id only (worst case for linear search)
+    #and for the last id only (worst case for linear search)
     worst_id = txns[-1]["id"]
 
     # Correctness checking: all three methods must agree
