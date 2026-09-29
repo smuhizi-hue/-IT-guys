@@ -1,10 +1,13 @@
 import xml.etree.ElementTree as ET
 import json
 import re
+from pathlib import Path
 from datetime import datetime, timezone
+from xml.sax.saxutils import escape
 
-XML_FILE = "modified_sms_v2.xml"
-JSON_FILE = "transactions.json"
+BASE_DIR = Path(__file__).resolve().parent
+XML_FILE = BASE_DIR / "modified_sms_v2.xml"
+JSON_FILE = BASE_DIR / "modified_sms_v2.json"
 
 
 def classify(body: str) -> str:
@@ -46,8 +49,21 @@ def parse_body(body: str) -> dict:
 
 
 def parse_xml(path: str) -> list[dict]:
-    tree = ET.parse(path)
-    root = tree.getroot()
+    with open(path, "r", encoding="utf-8", errors="replace") as f:
+        xml_text = f.read()
+
+    xml_start = xml_text.find("<")
+    if xml_start > 0:
+        xml_text = xml_text[xml_start:]
+
+    xml_text = re.sub(
+        r'(body=")(.*?)(")',
+        lambda m: m.group(1) + escape(m.group(2)) + m.group(3),
+        xml_text,
+        flags=re.DOTALL,
+    )
+
+    root = ET.fromstring(xml_text)
     records = []
 
     for i, sms in enumerate(root.iter("sms"), start=1):
@@ -74,8 +90,9 @@ def parse_xml(path: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    data = parse_xml(XML_FILE)
+    data = parse_xml(str(XML_FILE))
     with open(JSON_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Parsed {len(data)} records -> {JSON_FILE}")
-    print(json.dumps(data[0], indent=2))
+    if data:
+        print(json.dumps(data[0], indent=2))
