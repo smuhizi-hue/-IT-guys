@@ -222,3 +222,4 @@ curl -u username:password http://localhost:8000/transactions
 * screenshots/ — API testing screenshots
 
 Detailed API information is available in docs/api_docs.md.
+https://docs.google.com/spreadsheets/d/1xA7R5uE8dPfxzz6cW_pVWO3Uymybh-Akx53Jl8rL_dA/edit?usp=sharing
